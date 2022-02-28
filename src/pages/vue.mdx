@@ -1,0 +1,530 @@
+---
+title: Swiper Vue.js Components
+carbon: true
+---
+
+<div className="important-note md:mr-[340px]">
+  If you are upgrading from Swiper 6 to Swiper 7, check out{' '}
+  <a href="/migration-guide">Migration Guide to Swiper 7</a>
+</div>
+
+## Installation
+
+Swiper Vue.js plugin is available only via NPM as a part of the main Swiper library:
+
+```
+  npm i swiper
+```
+
+## Usage
+
+`swiper/vue` exports 2 components: `Swiper` and `SwiperSlide`:
+
+```html
+<template>
+  <swiper
+    :slides-per-view="3"
+    :space-between="50"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+    ...
+  </swiper>
+</template>
+<script>
+  // Import Swiper Vue.js components
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+
+  // Import Swiper styles
+  import 'swiper/css';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      const onSwiper = (swiper) => {
+        console.log(swiper);
+      };
+      const onSlideChange = () => {
+        console.log('slide change');
+      };
+      return {
+        onSwiper,
+        onSlideChange,
+      };
+    },
+  };
+</script>
+```
+
+<div className="important-note">
+  By default Swiper Vue.js uses core version of Swiper (without any additional
+  modules). If you want to use Navigation, Pagination and{' '}
+  <a href="/api/#custom-build">other modules</a>, you have to install them
+  first.
+</div>
+
+Here is the list of additional modules imports:
+
+- <code>Virtual</code> - Virtual Slides module
+- <code>Keyboard</code> - Keyboard Control module
+- <code>Mousewheel</code> - Mousewheel Control module
+- <code>Navigation</code> - Navigation module
+- <code>Pagination</code> - Pagination module
+- <code>Scrollbar</code> - Scrollbar module
+- <code>Parallax</code> - Parallax module
+- <code>FreeMode</code> - Free Mode module
+- <code>Grid</code> - Grid module
+- <code>Manipulation</code> - Slides manipulation module (only for Core version)
+- <code>Zoom</code> - Zoom module
+- <code>Lazy</code> - Lazy module
+- <code>Controller</code> - Controller module
+- <code>A11y</code> - Accessibility module
+- <code>History</code> - History Navigation module
+- <code>HashNavigation</code> - Hash Navigation module
+- <code>Autoplay</code> - Autoplay module
+- <code>EffectFade</code> - Fade Effect module
+- <code>EffectCube</code> - Cube Effect module
+- <code>EffectFlip</code> - Flip Effect module
+- <code>EffectCoverflow</code> - Coverflow Effect module
+- <code>EffectCards</code> - Cards Effect module
+- <code>EffectCreative</code> - Creative Effect module
+- <code>Thumbs</code> - Thumbs module
+
+```html
+<template>
+  <swiper
+    :modules="modules"
+    :slides-per-view="3"
+    :space-between="50"
+    navigation
+    :pagination="{ clickable: true }"
+    :scrollbar="{ draggable: true }"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+    ...
+  </swiper>
+</template>
+<script>
+  // import Swiper core and required modules
+  import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+  // Import Swiper Vue.js components
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+
+  // Import Swiper styles
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+  import 'swiper/css/scrollbar';
+
+  // Import Swiper styles
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      const onSwiper = (swiper) => {
+        console.log(swiper);
+      };
+      const onSlideChange = () => {
+        console.log('slide change');
+      };
+      return {
+        onSwiper,
+        onSlideChange,
+        modules: [Navigation, Pagination, Scrollbar, A11y],
+      };
+    },
+  };
+</script>
+```
+
+<div className="important-note">
+  Note, Swiper Vue.js component will create required elements for Navigation,
+  Pagination and Scrollbar if you pass these params without specifying its
+  elements (e.g. without <code>navigation.nextEl</code>,{' '}
+  <code>pagination.el</code>, etc.)
+</div>
+
+## Styles
+
+Swiper package contains different sets of CSS, Less and SCSS styles:
+
+- `swiper/css` - only core Swiper styles
+- `swiper/css/bundle` - all Swiper styles including all modules styles (like Navigation, Pagination, etc.)
+
+Modules styles (not required if you already imported bundle styles):
+
+- `swiper/css/a11y` - styles required for A11y module
+- `swiper/css/autoplay` - styles required for Autoplay module
+- `swiper/css/controller` - styles required for Controller module
+- `swiper/css/effect-cards` - styles required for Cards Effect module
+- `swiper/css/effect-coverflow` - styles required for Coverflow Effect module
+- `swiper/css/effect-creative` - styles required for Creative Effect module
+- `swiper/css/effect-cube` - styles required for Cube Effect module
+- `swiper/css/effect-fade` - styles required for Fade Effect module
+- `swiper/css/effect-flip` - styles required for Flip Effect module
+- `swiper/css/free-mode` - styles required for Free Mode module
+- `swiper/css/grid` - styles required for Grid module
+- `swiper/css/hash-navigation` - styles required for Hash Navigation module
+- `swiper/css/history` - styles required for History module
+- `swiper/css/keyboard` - styles required for Keyboard module
+- `swiper/css/lazy` - styles required for Lazy module
+- `swiper/css/manipulation` - styles required for Manipulation module
+- `swiper/css/mousewheel` - styles required for Mousewheel module
+- `swiper/css/navigation` - styles required for Navigation module
+- `swiper/css/pagination` - styles required for Pagination module
+- `swiper/css/parallax` - styles required for Parallax module
+- `swiper/css/scrollbar` - styles required for Scrollbar module
+- `swiper/css/thumbs` - styles required for Thumbs module
+- `swiper/css/virtual` - styles required for Virtual module
+- `swiper/css/zoom` - styles required for Zoom module
+
+For Less styles replace `css` with `less` in imports paths, e.g.:
+
+```js
+import 'swiper/less';
+import 'swiper/less/navigation';
+import 'swiper/less/pagination';
+```
+
+For SCSS styles replace `css` with `scss` in imports paths, e.g.:
+
+```js
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+```
+
+## Swiper props
+
+`Swiper` Vue.js component receive all <a href="/api/#parameters">Swiper parameters</a> as component props, plus some extra props:
+
+| Prop         | Type     | Default | Description                            |
+| ------------ | -------- | ------- | -------------------------------------- |
+| `tag`        | `string` | `'div'` | Main Swiper container HTML element tag |
+| `wrapperTag` | `string` | `'div'` | Swiper wrapper HTML element tag        |
+
+## Swiper events
+
+Swiper component supports all <a href="/api/#events">Swiper events</a>, including additional `swiper` event that returns swiper instance as soon as posible. For example:
+
+```html
+<swiper @swiper="..." @slideChange="..." @reachEnd="..." ...></swiper>
+```
+
+## SwiperSlide props
+
+| Prop           | Type      | Default | Description                                                      |
+| -------------- | --------- | ------- | ---------------------------------------------------------------- |
+| `tag`          | `string`  | `'div'` | Swiper Slide HTML element tag                                    |
+| `zoom`         | `boolean` | `false` | Enables additional wrapper required for zoom mode                |
+| `virtualIndex` | `number`  |         | Actual swiper slide index. Required to be set for virtual slides |
+
+## SwiperSlide slot props
+
+`SwiperSlide` component has the following slot props:
+
+- `isActive` - true when current slide is active
+- `isPrev` - true when current slide is the previous from active
+- `isNext` - true when current slide is the next from active
+- `isVisible` - true when current slide is visible (`watchSlidesProgress` Swiper parameter must be enabled)
+- `isDuplicate` - true when current slide is a duplicate slide (when `loop` mode enabled)
+  For example:
+
+```html
+<swiper>
+  <swiper-slide v-slot="{ isActive }">
+    <div>Current slide is {{ isActive ? 'active' : 'not active' }}</div>
+  </swiper-slide>
+</swiper>
+```
+
+## Slots
+
+Swiper Vue.js component uses "slots" for content distribution. There are 4 slots available
+
+- `container-start` - element will be added to the beginning of swiper-container
+- `container-end` (default) - element will be added to the end of swiper-container
+- `wrapper-start` - element will be added to the beginning of swiper-wrapper
+- `wrapper-end` - element will be added to the end of swiper-wrapper
+
+For example:
+
+```html
+<swiper>
+  <swiper-slide>Slide 1</swiper-slide>
+  <swiper-slide>Slide 2</swiper-slide>
+  <template v-slot:container-start> <span>Container start<span></template>
+  <template v-slot:container-end> <span>Container end><span></template>
+  <template v-slot:wrapper-start><span>Wrapper start<span></template>
+  <template v-slot:wrapper-end> <span>Wrapper end<span></template>
+</swiper>
+```
+
+Will be rendered as:
+
+```html
+<div class="swiper">
+  <span>Container start</span>
+  <div class="swiper-wrapper">
+    <span>Wrapper start</span>
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <span>Wrapper wnd</span>
+  </div>
+  <span>Container end</span>
+</div>
+```
+
+## Virtual Slides
+
+Virtual Slides rendering here is fully handled by Vue.js and not required anything except setting `:virtual="true"` property and setting `virtualIndex` on slides:
+
+```html
+<template>
+  <swiper :modules="[Virtual]" :slides-per-view="3" :space-between="50" virtual>
+    <swiper-slide
+      v-for="(slideContent, index) in slides"
+      :key="index"
+      :virtualIndex="index"
+      >{{slideContent}}</swiper-slide
+    >
+  </swiper>
+</template>
+<script>
+  import { Virtual } from 'swiper';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+
+    setup() {
+      // Create array with 1000 slides
+      const slides = Array.from({ length: 1000 }).map(
+        (el, index) => `Slide ${index + 1}`
+      );
+      return {
+        slides,
+        Virtual,
+      };
+    },
+  };
+</script>
+```
+
+## Controller
+
+Controller requires to pass one Swiper instance to another:
+
+```html
+<template>
+  <!-- Main Swiper -> pass controlled swiper instance -->
+  <swiper
+    :modules="[Controller]"
+    :controller="{ control: controlledSwiper }"
+    ...
+  >
+    ...
+  </swiper>
+
+  <!-- Controlled Swiper -> store swiper instance -->
+  <swiper :modules="[Controller]" @swiper="setControlledSwiper" ...>
+    ...
+  </swiper>
+</template>
+<script>
+  import { ref } from 'vue';
+  import { Controller } from 'swiper';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      const controlledSwiper = ref(null);
+      const setControlledSwiper = (swiper) => {
+        controlledSwiper.value = swiper;
+      }
+      return {
+        Controller,
+        controlledSwiper,
+        setControlledSwiper,
+      };
+    },
+  };
+</script>
+```
+
+For two-way control (when both Swipers control each other) it should be like this:
+
+```html
+<template>
+  <swiper
+    :modules="[Controller]"
+    @swiper="setFirstSwiper"
+    :controller="{ control: secondSwiper }"
+    ...
+  >
+    ...
+  </swiper>
+  <swiper
+    :modules="[Controller]"
+    @swiper="setSecondSwiper"
+    :controller="{ control: firstSwiper }"
+    ...
+  >
+    ...
+  </swiper>
+</template>
+<script>
+  import { ref } from 'vue';
+  import { Controller } from 'swiper';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      const firstSwiper = ref(null);
+      const secondSwiper = ref(null);
+      const setFirstSwiper = (swiper) => {
+        firstSwiper.value = swiper;
+      };
+      const setSecondSwiper = (swiper) => {
+        secondSwiper.value = swiper;
+      };
+
+      return {
+        Controller,
+        firstSwiper,
+        secondSwiper,
+        setFirstSwiper,
+        setSecondSwiper,
+      };
+    },
+  };
+</script>
+```
+
+## Thumbs
+
+Same as with controller we need to store thumbs instance and pass it to main gallery:
+
+```html
+<template>
+  <!-- Main Swiper -> pass thumbs swiper instance -->
+  <swiper :modules="[Thumbs]" :thumbs="{ swiper: thumbsSwiper }" ...>
+    ...
+  </swiper>
+
+  <!-- Thumbs Swiper -> store swiper instance -->
+  <!-- It is also required to set watchSlidesProgress prop -->
+  <swiper
+    :modules="[Thumbs]"
+    watch-slides-progress
+    @swiper="setThumbsSwiper"
+    ...
+  >
+    ...
+  </swiper>
+</template>
+<script>
+  import { ref } from 'vue';
+  import { Thumbs } from 'swiper';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      const thumbsSwiper = ref(null);
+      const setThumbsSwiper = (swiper) => {
+        thumbsSwiper.value = swiper;
+      };
+      return {
+        Thumbs,
+        thumbsSwiper,
+        setThumbsSwiper,
+      };
+    },
+  };
+</script>
+```
+
+## Effects
+
+The following effects are available:
+
+    - Fade
+    - Cube
+    - Coverflow
+    - Flip
+    - Cards
+    - Creative
+
+To use effects you have to import and install them first (as all other modules).
+
+You can find running <a href="https://swiperjs.com/demos/#effect-fade">effect demos here</a>.
+
+### Full Fade Effect Example
+
+```html
+<template>
+  <swiper :modules="[EffectFade]" effect="fade">
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+    ...
+  </swiper>
+</template>
+<script>
+  import { EffectFade } from 'swiper';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+
+  import 'swiper/css';
+  import 'swiper/css/effect-fade';
+
+  export default {
+    components: {
+      Swiper,
+      SwiperSlide,
+    },
+    setup() {
+      return {
+        EffectFade,
+      };
+    },
+  };
+</script>
+```
+
+## What next?
+
+As you see it is really easy to integrate Swiper into your website or app. So here are your next steps:
+
+- Go to <a href="../api/">API Documentation</a> to learn more about all Swiper API and how to control it.
+- Look at available <a href="../demos/" target="_blank">Demos</a>.
+- If you have questions about Swiper ask them in <a href="http://stackoverflow.com" target="_blank">StackOverflow</a> or <a href="https://github.com/nolimits4web/swiper/discussions" target="_blank">Swiper Discussions</a>.
+- Create issue on <a href="https://github.com/nolimits4web/swiper/" target="_blank">GitHub</a> if you found a bug.
+- If you are looking for support, we have a private Discord support chat room for <a href="https://www.patreon.com/swiperjs" target="_blank">Swiper Patrons</a>.
